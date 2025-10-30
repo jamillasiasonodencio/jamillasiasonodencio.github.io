@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jamilla Siason— Portfolio</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Basic metadata for social preview -->
+  <meta name="description" content="Portfolio of Your Name — developer / designer / creator. Projects, videos, skills and contact.">
+
+  <style>
+    :root{
+      --bg:black;
+      --card:pink;
+      --muted:white;
+      --accent:pink;
+      --glass: black(255,255,255,0.04);
+      --radius:14px;
+      --gap:18px;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.08), transparent 6%),
+        linear-gradient(180deg,#071019 0%, var(--bg) 100%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:28px;
+    }
+
+    .container{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:28px}
+
+    header{
+      display:flex;gap:16px;align-items:center;justify-content:space-between;
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#5b21b6);
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:white;
+      box-shadow:0 6px 18px rgba(10,8,15,0.5);
+    }
+    nav a{color:var(--muted);text-decoration:none;margin-left:14px;font-weight:600}
+    nav a:hover{color:#fff}
+
+    .hero{
+      display:grid;grid-template-columns:220px 1fr;gap:24px;background:var(--glass);border-radius:var(--radius);padding:20px;
+      align-items:center;
+    }
+    .photo{
+      width:100%;height:220px;border-radius:12px;overflow:hidden;
+      box-shadow:0 10px 30px rgba(2,6,23,0.6);background:#111;
+    }
+    .photo img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .intro h1{margin:0;font-size:clamp(20px,4.2vw,28px)}
+    .intro p{color:var(--muted);margin-top:10px}
+    .cta{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+    .btn{
+      background:linear-gradient(90deg,var(--accent),#5b21b6);
+      border:none;padding:10px 14px;border-radius:10px;color:white;font-weight:600;cursor:pointer;
+      box-shadow:0 6px 18px rgba(92,41,180,0.12)
+    }
+    .btn.alt{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    /* Layout sections */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:var(--gap);
+    }
+    @media (max-width:980px){
+      .hero{grid-template-columns:140px 1fr}
+      .grid{grid-template-columns:1fr}
+    }
+
+    /* About & Projects cards */
+    section.card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);
+    }
+
+    .about p{color:var(--muted);margin-top:10px}
+    .skills {display:flex;flex-direction:column;gap:10px}
+    .skill{
+      display:flex;align-items:center;gap:12px;
+    }
+    .skill .meta{min-width:110px;color:var(--muted);font-weight:600}
+    .bar{flex:1;height:10px;background:rgba(255,255,255,0.06);border-radius:999px;overflow:hidden}
+    .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#4f46e5);border-radius:999px}
+
+    .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    @media (max-width:700px){.projects-grid{grid-template-columns:1fr}}
+    .project{
+      background:rgba(255,255,255,0.02);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;
+    }
+    .project img{width:100%;height:140px;object-fit:cover;display:block}
+    .project .body{padding:12px}
+    .project h3{margin:0;font-size:16px}
+    .project p{margin:8px 0 12px;color:var(--muted);font-size:13px}
+    .project .proj-actions{display:flex;gap:8px;align-items:center}
+
+    /* Right column */
+    .right .card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .videos .video{
+      margin-bottom:12px;border-radius:10px;overflow:hidden;background:#071024;
+    }
+    .video iframe{width:100%;height:200px;display:block;border:0}
+
+    footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* Simple modal for images */
+    .modal{
+      position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.7);
+      z-index:60;padding:20px;
+    }
+    .modal.open{display:flex}
+    .modal .box{max-width:1000px;width:100%;border-radius:12px;overflow:hidden}
+    .modal img{width:100%;height:auto;display:block}
+    .close-btn{position:absolute;right:28px;top:28px;background:rgba(255,255,255,0.06);border-radius:8px;padding:8px 10px;color:white;border:0;cursor:pointer}
+
+    /* small touches */
+    .muted{color:var(--muted);font-size:13px}
+    a.link{color:var(--accent);text-decoration:none;font-weight:600}
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">JS</div>
+        <div>
+          <div style="font-weight:700">Jamilla Siason</div>
+          <div class="muted">Designer • Developer • Programmer</div>
+        </div>
+      </div>
+
+      <nav aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#videos">Videos</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero card" aria-labelledby="intro-heading">
+      <div class="photo" role="img" aria-label="Your portrait">
+        <!-- Replace with your portrait -->
+        <img src="/siason/3c4167a5-e6bf-4d22-9e88-ce7c98a3ae7a.jfif" alt="Portrait of Your Name">
+      </div>
+
+      <div class="intro">
+        <h1 id="intro-heading">“Building Creative Digital Solutions Through Code and Innovation.”</p>
+
+        <div class="cta">
+          <a class="btn" href="#projects">See projects</a>
+          <a class="btn alt" href="#contact">Get in touch</a>
+        </div>
+
+        
+      </div>
+    </section>
+
+    <!-- Main grid: left = about & projects, right = skills & videos -->
+    <div class="grid">
+
+      <!-- Left column -->
+      <div style="display:grid;gap:var(--gap)">
+
+        <!-- About -->
+        <section id="about" class="card about" aria-labelledby="about-title">
+          <h2 id="about-title">About Me</h2>
+          <p>
+            Hi! I’m an IT student who loves exploring how technology works behind the scenes. I’m currently learning about software development, networking, and system administration. I enjoy tackling new challenges, experimenting with coding projects, and staying up to date with the latest tech trends.
+          </p>
+
+          <p style="margin-top:12px">
+            <strong>Contact:</strong>
+            <a class="link" href="mailto:your@email.com">jamillasiason4@gmail.com
+            </a>
+            · <span class="muted">09166470809</span>
+          </p>
+        </section>
+         <!-- Projects -->
+        <section id="projects" class="card" aria-labelledby="projects-title">
+          <div style="display:flex;justify-content:space-between;align-items:end;">
+            <h2 id="projects-title">Projects</h2>
+            <div class="muted">Selected work</div>
+          </div>
+         <div class="projects-grid" style="margin-top:12px">
+            <!-- Project 1 -->
+            <article class="project">
+              <img src="/siason/cc1d63e4-555a-446a-9ddc-f51445aef55f.jfif" alt="Screenshot of Project One" loading="lazy" onclick="openModal('images/project1.jpg')" style="cursor:pointer">
+              <div class="body">
+                <h3>Product Editing</h3>
+                <p class="muted">A visually appealing drink edit that captures the perfect blend of color, flavor, and freshness — designed to make every sip look delicious.</p>
+                <div class="proj-actions">
+                  <a class="btn" href="/siason/cc1d63e4-555a-446a-9ddc-f51445aef55f.jfif" target="_blank" rel="noopener">View</a>
+                </div>
+              </div>
+            </article>
+            <!-- Project 2-->
+            <article class="project">
+              <img src="/siason/a2404454-a8b6-4dd6-82d2-9c98a486ddf7.jfif" alt="Screenshot of Project Two" loading="lazy" onclick="openModal('images/project1.jpg')" style="cursor:pointer">
+              <div class="body">
+                <h3>Banner</h3>
+                <p class="muted">A clean and creative banner designed in Adobe Photoshop, showcasing strong visuals and balanced composition.</p>
+                <div class="proj-actions">
+                  <a class="btn" href="/siason/a2404454-a8b6-4dd6-82d2-9c98a486ddf7.jfif" target="_blank" rel="noopener">View</a>
+                </div>
+              </div>
+            </article>
+           
+            <!-- Project 3 -->
+            <article class="project">
+              <img src="/siason/6a89c728-088d-4610-b0a1-92fb925a4245.jfif"alt="Screenshot of Project Three" loading="lazy" onclick="openModal('images/project3.jpg')" style="cursor:pointer">
+              <div class="body">
+                <h3>Canva Portfolio</h3>
+                <p class="muted">A visually appealing portfolio designed in Canva, featuring a modern layout and creative elements that highlight my work and personality.</p>
+                <div class="proj-actions">
+                  <a class="btn" href="/siason/6a89c728-088d-4610-b0a1-92fb925a4245.jfif" target="_blank" rel="noopener">View</a>
+                  
+              </div>
+            </article>
+
+            <!-- Project 4 -->
+            <article class="project">
+              <img src="/siason/a1fbcc14-96c7-4543-9904-8fcee01079fb.jfif" alt="Screenshot of Project Four" loading="lazy" onclick="openModal('images/project4.jpg')" style="cursor:pointer">
+              <div class="body">
+                <h3>E-commerce Figma</h3>
+                <p class="muted">A stylish Figma design for an online bag store that combines creativity, functionality, and modern aesthetics.</p>
+                <div class="proj-actions">
+                  <a class="btn" href="/siason/a1fbcc14-96c7-4543-9904-8fcee01079fb.jfif"target="_blank" rel="noopener">View</a>
+                 
+              </div>
+            </article>
+
+          </div>
+        </section>
+      </div>
+
+      <!-- Right column -->
+      <aside class="right" style="display:flex;flex-direction:column;gap:var(--gap)">
+
+        <!-- Skills -->
+        <section class="card skills" aria-labelledby="skills-title">
+          <div class="card-head">
+            <h2 id="skills-title">Skills</h2>
+            <div class="muted">Tools & tech</div>
+          </div>
+
+          <!-- List your skills below; adjust widths inside the <i style="width:..."> -->
+          <div class="skill">
+            <div class="meta">HTML</div>
+            <div class="bar" aria-hidden="true"><i style="width:95%"></i></div>
+          </div>
+
+          <div class="skill">
+            <div class="meta">JavaScript</div>
+            <div class="bar"><i style="width:88%"></i></div>
+          </div>
+
+          <div class="skill">
+            <div class="meta">Canva</div>
+            <div class="bar"><i style="width:82%"></i></div>
+          </div>
+
+          <div class="skill">
+            <div class="meta">E commerce (Figma)</div>
+            <div class="bar"><i style="width:80%"></i></div>
+          </div>
+
+          <div style="margin-top:10px" class="muted"></div>
+        </section>
+
+        <!-- Videos -->
+        <section id="videos" class="card videos" aria-labelledby="videos-title">
+          <div class="card-head">
+            <h2 id="videos-title">Videos</h2>
+            <div class="muted">Tutorials</div>
+          </div>
+
+          <div class="video">
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/1_0Z2opYJ4c?si=AdehgLy6pEdu0oKf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+
+          <div class="video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/IRMmpzCsyWA?si=FHR4R0szDBJlJ5Wl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+
+          <div class="video">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Rht8rS4cR1s?si=rSc_lAJSrJC94Vjt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+        </section>
+
+        <!-- Small contact card -->
+        <section id="contact" class="card" aria-labelledby="contact-title">
+          <h2 id="contact-title">Contact</h2>
+          <p class="muted" style="margin-top:8px">You want to send message to me? Reach out here:</p>
+
+          <p style="margin-top:10px">
+            <strong>Email:</strong> <a class="link" href="jamillasiason4@gmail.com">jamillasiason4@gmail.com</a><br>
+            <strong>Phone:</strong> <span class="muted">09166470809</span><br>
+            <strong>Location:</strong> <span class="muted">Moises Padilla Negros Occidental</span>
+          </p>
+
+          <div style="margin-top:12px">
+            <a class="btn" href="mailto:your@email.com">Email me</a>
+            <a class="btn alt" href="#" style="margin-left:8px">Message me</a>
+          </div>
+        </section>
+
+      </aside>
+    </div>
+
+    
+  </div>
+
+  <!-- Image modal (simple) -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="close-btn" onclick="closeModal()" aria-label="Close viewer">Close ✕</button>
+    <div class="box"><img id="modal-img" src="" alt="Expanded project screenshot"></div>
+  </div>
+
+  <script>
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // modal helpers
+    function openModal(imgSrc){
+      const modal = document.getElementById('modal');
+      const img = document.getElementById('modal-img');
+      img.src = imgSrc;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+    function closeModal(){
+      const modal = document.getElementById('modal');
+      const img = document.getElementById('modal-img');
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      img.src = '';
+    }
+    // close modal on ESC
+    window.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closeModal();
+    });
+    // close when clicking backdrop
+    document.getElementById('modal').addEventListener('click', function(e){
+      if(e.target === this) closeModal();
+    });
+  </script>
+</body>
+</html>
