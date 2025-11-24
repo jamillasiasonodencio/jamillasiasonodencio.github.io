@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jamilla Siason — Portfolio</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <meta name="description" content="Portfolio of Jamilla Siason — IT student, developer, and designer. Projects, videos, skills and contact.">
+
+  <style>
+    :root{
+      --bg:#000;
+      --card:#111;
+      --muted:#f5f5f5;
+      --accent:#ff6fb2; /* brighter pink for contrast */
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      --gap:18px;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(255,111,178,0.05), transparent 6%),
+        linear-gradient(180deg,#08060d 0%, var(--bg) 100%);
+      color:#e6eef6;
+      line-height:1.45;
+      padding:28px;
+    }
+
+    .container{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:28px}
+
+    header{
+      display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:56px;height:56px;border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),#5b21b6);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;color:white;
+      box-shadow:0 6px 18px rgba(10,8,15,0.5);
+    }
+    nav a{
+      color:var(--muted);text-decoration:none;margin-left:14px;font-weight:600;transition:0.2s;
+    }
+    nav a:hover{color:var(--accent)}
+
+    .hero{
+      display:grid;
+      grid-template-columns:220px 1fr;
+      gap:24px;
+      background:var(--glass);
+      border-radius:var(--radius);
+      padding:20px;
+      align-items:center;
+      transition:0.3s;
+    }
+    .photo{
+      width:100%;height:220px;border-radius:12px;overflow:hidden;
+      box-shadow:0 10px 30px rgba(2,6,23,0.6);background:#111;
+    }
+    .photo img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .intro h1{margin:0;font-size:clamp(20px,4.2vw,28px)}
+    .intro p{color:var(--muted);margin-top:10px}
+    .cta{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+    .btn{
+      background:linear-gradient(90deg,var(--accent),#5b21b6);
+      border:none;padding:10px 14px;border-radius:10px;color:white;
+      font-weight:600;cursor:pointer;transition:0.3s;
+      box-shadow:0 6px 18px rgba(92,41,180,0.12)
+    }
+    .btn:hover{transform:translateY(-2px);opacity:0.9}
+    .btn.alt{
+      background:transparent;border:1px solid rgba(255,255,255,0.1);color:var(--muted)
+    }
+    .btn.alt:hover{border-color:var(--accent);color:var(--accent)}
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:var(--gap);
+    }
+    @media (max-width:980px){
+      .hero{grid-template-columns:140px 1fr}
+      .grid{grid-template-columns:1fr}
+    }
+    @media (max-width:600px){
+      .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+      }
+      .photo{
+        width:160px;height:160px;margin:0 auto;
+      }
+      .cta{justify-content:center}
+    }
+
+    section.card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius:12px;padding:18px;
+      border:1px solid rgba(255,255,255,0.05);
+      transition:0.3s;
+    }
+    section.card:hover{border-color:rgba(255,255,255,0.1)}
+
+    .about p{color:var(--muted);margin-top:10px}
+    .skills {display:flex;flex-direction:column;gap:10px}
+    .skill{
+      display:flex;align-items:center;gap:12px;
+    }
+    .skill .meta{min-width:110px;color:var(--muted);font-weight:600}
+    .bar{flex:1;height:10px;background:rgba(255,255,255,0.06);border-radius:999px;overflow:hidden}
+    .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#4f46e5);border-radius:999px}
+
+    .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    @media (max-width:700px){.projects-grid{grid-template-columns:1fr}}
+    .project{
+      background:rgba(255,255,255,0.02);
+      border-radius:10px;
+      overflow:hidden;
+      display:flex;flex-direction:column;
+      transition:0.3s;
+    }
+    .project:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.1)}
+    .project img{width:100%;height:140px;object-fit:cover;display:block;cursor:pointer}
+    .project .body{padding:12px}
+    .project h3{margin:0;font-size:16px;color:#fff}
+    .project p{margin:8px 0 12px;color:var(--muted);font-size:13px}
+    .project .proj-actions{display:flex;gap:8px;align-items:center}
+
+    .right .card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .videos .video{margin-bottom:12px;border-radius:10px;overflow:hidden;background:#071024;}
+    .video iframe{width:100%;height:200px;display:block;border:0}
+
+    footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+
+    .modal{
+      position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.7);
+      z-index:60;padding:20px;
+    }
+    .modal.open{display:flex}
+    .modal .box{max-width:1000px;width:100%;border-radius:12px;overflow:hidden}
+    .modal img{width:100%;height:auto;display:block}
+    .close-btn{
+      position:absolute;right:28px;top:28px;
+      background:rgba(255,255,255,0.06);border-radius:8px;
+      padding:8px 10px;color:white;border:0;cursor:pointer;
+      transition:0.2s;
+    }
+    .close-btn:hover{background:rgba(255,255,255,0.15)}
+
+    .muted{color:var(--muted);font-size:13px}
+    a.link{color:var(--accent);text-decoration:none;font-weight:600}
+    a.link:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <div class="brand">
+        <div class="logo">JS</div>
+        <div>
+          <div style="font-weight:700">Jamilla Siason</div>
+          <div class="muted">Designer • Developer • Programmer</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#videos">Videos</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero card" aria-labelledby="intro-heading">
+      <div class="photo">
+       <img src="1760787040653.jpg" alt="Portrait of Jamilla Siason">
+      </div>
+      <div class="intro">
+        <h1 id="intro-heading">“Building Creative Digital Solutions Through Code and Innovation.”</h1>
+        <div class="cta">
+          <a class="btn" href="#projects">See projects</a>
+          <a class="btn alt" href="#contact">Get in touch</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid">
+
+      <div style="display:grid;gap:var(--gap)">
+
+        <!-- About -->
+        <section id="about" class="card about">
+          <h2>About Me</h2>
+          <p>
+            Hi! I’m an IT student who loves exploring how technology works behind the scenes. I’m currently learning about software development, networking, and system administration. I enjoy tackling new challenges, experimenting with coding projects, and staying up to date with the latest tech trends.
+          </p>
+          <p style="margin-top:12px">
+            <strong>Contact:</strong>
+            <a class="link" href="mailto:jamillasiason4@gmail.com">jamillasiason4@gmail.com</a>
+            · <span class="muted">09166470809</span>
+          </p>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects" class="card">
+          <div style="display:flex;justify-content:space-between;align-items:end;">
+            <h2>Projects</h2>
+            <div class="muted">Selected work</div>
+          </div>
+
+          <div class="projects-grid" style="margin-top:12px">
+
+            <article class="project">
+              <img src="/IMG_20250827_115925~2.jpg" alt="Product Editing" onclick="openModal(this.src)">
+              <div class="body">
+                <h3>Product Editing</h3>
+                <p class="muted">A visually appealing drink edit that captures the perfect blend of color, flavor, and freshness — designed to make every sip look delicious.</p>
+                <div class="proj-actions">
+                  <a class="btn" href="IMG_20250827_115925~2.jpg" target="_blank">View</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project">
+              <img src="/Screenshot_2025-10-06-20-52-57-783_com.canva.editor~3.jpg"alt="Banner" onclick="openModal(this.src)">
+              <div class="body">
+                <h3>Banner</h3>
+                <p class="muted">A clean and creative banner designed in Adobe Photoshop, showcasing strong visuals and balanced composition.</p>
+                <div class="proj-actions">
+                  <a class="btn" href="IMG_20250813_162130~2.jpg" target="_blank">View</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project">
+              <img src="/Screenshot_2025-08-08-16-51-37-415_com.google.android.apps.docs~2.jpg" alt="Canva Portfolio" onclick="openModal(this.src)">
+              <div class="body">
+                <h3>Canva Portfolio</h3>
+                <p class="muted">A visually appealing portfolio designed in Canva, featuring a modern layout and creative elements that highlight my work and personality.</p>
+                <div class="proj-actions">
+                  <a class="btn" href="Screenshot_2025-08-08-16-51-37-415_com.google.android.apps.docs~2.jpg" target="_blank">View</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project">
+              <img src="Screenshot_2025-10-30-14-06-05-725_com.figma.mirror~2.jpg" alt="E-commerce Figma" onclick="openModal(this.src)">
+              <div class="body">
+                <h3>E-commerce Figma</h3>
+                <p class="muted">A stylish Figma design for an online bag store that combines creativity, functionality, and modern aesthetics.</p>
+                <div class="proj-actions">
+                  <a class="btn" href="Screenshot_2025-10-30-14-06-05-725_com.figma.mirror~2.jpg" target="_blank">View</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <!-- Right column -->
+      <aside class="right" style="display:flex;flex-direction:column;gap:var(--gap)">
+
+        <!-- Skills -->
+        <section class="card skills">
+          <div class="card-head">
+            <h2>Skills</h2>
+            <div class="muted">Tools & tech</div>
+          </div>
+
+          <div class="skill"><div class="meta">HTML</div><div class="bar"><i style="width:95%"></i></div></div>
+          <div class="skill"><div class="meta">JavaScript</div><div class="bar"><i style="width:88%"></i></div></div>
+          <div class="skill"><div class="meta">Canva</div><div class="bar"><i style="width:82%"></i></div></div>
+          <div class="skill"><div class="meta">E-commerce (Figma)</div><div class="bar"><i style="width:80%"></i></div></div>
+        </section>
+
+        <!-- Videos -->
+        <section id="videos" class="card videos">
+          <div class="card-head">
+            <h2>Videos</h2>
+            <div class="muted">Tutorials</div>
+          </div>
+          <div class="video">
+            <iframe src="https://www.youtube.com/embed/1_0Z2opYJ4c" allowfullscreen></iframe>
+          </div>
+          <div class="video">
+            <iframe src="https://www.youtube.com/embed/IRMmpzCsyWA" allowfullscreen></iframe>
+          </div>
+          <div class="video">
+            <iframe src="https://www.youtube.com/embed/Rht8rS4cR1s" allowfullscreen></iframe>
+          </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="card">
+          <h2>Contact</h2>
+          <p class="muted" style="margin-top:8px">Want to message me? Reach out here:</p>
+          <p style="margin-top:10px">
+            <strong>Email:</strong> <a class="link" href="mailto:jamillasiason4@gmail.com">jamillasiason4@gmail.com</a><br>
+            <strong>Phone:</strong> <span class="muted">09166470809</span><br>
+            <strong>Location:</strong> <span class="muted">Moises Padilla, Negros Occidental</span>
+          </p>
+          <div style="margin-top:12px">
+            <a class="btn" href="mailto:jamillasiason4@gmail.com">Email me</a>
+            <a class="btn alt" href="#">Message me</a>
+          </div>
+        </section>
+
+      </aside>
+    </div>
+
+    <footer>
+      
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <button class="close-btn" onclick="closeModal()">✕</button>
+    <div class="box"><img id="modal-img" src="" alt=""></div>
+  </div>
+
+  <script>
+    function openModal(src){
+      const modal = document.getElementById('modal');
+      const img = document.getElementById('modal-img');
+      img.src = src;
+      modal.classList.add('open');
+    }
+    function closeModal(){
+      document.getElementById('modal').classList.remove('open');
+      document.getElementById('modal-img').src = '';
+    }
+  </script>
+</body>
+</html>
